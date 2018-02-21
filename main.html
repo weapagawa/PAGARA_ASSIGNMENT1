@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<ul id="rudr_userinfo"></ul>
+<link rel="stylesheet" href="insta.css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+	
+var token = '3221511505.eec0828.bc104cde4add4f36949a64585487cf72', // generated client id and client secret on instagram or user id
+ num_photos = 10; // how much photos do you want to get
+ 
+$.ajax({
+	url: 'https://api.instagram.com/v1/users/self/media/recent',
+	dataType: 'jsonp',
+	type: 'GET',
+	data: {access_token: token, count: num_photos},
+	success: function(data){
+ 		console.log(data);
+		for( x in data.data ){
+			$('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>');
+		}
+	},
+	error: function(data){
+		console.log(data); // send the error notifications to console
+	}
+});
+</script>
+
+</body>
+</html>
